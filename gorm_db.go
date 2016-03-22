@@ -2,9 +2,10 @@ package dpgorm
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/deferpanic/deferclient/deferstats"
 	"github.com/jinzhu/gorm"
-	"time"
 )
 
 type DbGorm struct {
@@ -115,13 +116,13 @@ func (db *DbGorm) Not(query interface{}, args ...interface{}) *gorm.DB {
 	return db.Other.Not(query, args...)
 }
 
-func (db *DbGorm) Limit(value interface{}) *gorm.DB {
+func (db *DbGorm) Limit(value int) *gorm.DB {
 	startTime := time.Now()
 	defer db.logQuery(startTime, fmt.Sprintf("%#v", value))
 	return db.Other.Limit(value)
 }
 
-func (db *DbGorm) Offset(value interface{}) *gorm.DB {
+func (db *DbGorm) Offset(value int) *gorm.DB {
 	startTime := time.Now()
 	defer db.logQuery(startTime, fmt.Sprintf("%#v", value))
 	return db.Other.Offset(value)
